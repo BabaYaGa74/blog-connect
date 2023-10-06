@@ -1,5 +1,3 @@
-const mongoose = require("mongoose");
-
-const connection = mongoose.connect();
-
-module.exports = connection;
+export const database = () => {
+  console.log("Database connection");
+};
