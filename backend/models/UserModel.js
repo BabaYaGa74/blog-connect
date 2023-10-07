@@ -17,6 +17,18 @@ const UserModel = {
     const qry = "SELECT * FROM users WHERE id = ?";
     db.query(qry, [id], callback);
   },
+
+  update: (id, userData, callback) => {
+    const { name, username, email, password } = userData;
+    const qry =
+      "UPDATE users SET name=?, username=?, email=?, password=? WHERE id = ?";
+    db.query(qry, [name, username, email, password, id], callback);
+  },
+
+  delete: (id, callback) => {
+    const qry = "DELETE FROM users WHERE id =?";
+    db.query(qry, [id], callback);
+  },
 };
 
 module.exports = UserModel;
