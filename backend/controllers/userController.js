@@ -50,7 +50,31 @@ const getUser = async (req, res) => {
 //@route
 //access
 const updateUser = async (req, res) => {
-  res.send({ message: "Register Successfull" });
+  const { id } = req.params;
+  const { name, username, email, password } = req.body;
+  const userData = { name, username, email, password };
+  UserModel.update(id, userData, (error, result) => {
+    if (error)
+      res
+        .status(400)
+        .send({ success: false, message: "Error occurred during update" });
+    else {
+      res.status(200).send({ success: true, result });
+    }
+  });
+};
+
+//@desc
+//@route
+//access
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  UserModel.delete(id, (error, result) => {
+    if (error) res.status(400).send("Cannot delete due to some error");
+    else {
+      res.status(200).send({ success: true, result });
+    }
+  });
 };
 
 module.exports = {
@@ -58,4 +82,5 @@ module.exports = {
   createUser,
   getUser,
   updateUser,
+  deleteUser,
 };
