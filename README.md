@@ -1,4 +1,4 @@
 ##Random Project
 
-This is a random backend project. I might add some frontend later on if i feel like it.
-Changing the Readme to maintain the contribution streak of the repo
+This is the ReadMe file of random project. This project is not intended for deployment.
+It is being developed just for practice purposes.
