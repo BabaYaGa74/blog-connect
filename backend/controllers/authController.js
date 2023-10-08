@@ -1,20 +1,20 @@
-//@desc
-//@route
-//access
+//@desc Registers a new User
+//@route /api/users/register
+//access PUBLIC
 const registerUser = async (req, res) => {
-  res.send({ message: "Register Successfull" });
+  res.send({ message: "Register Successful" });
 };
 
-//@desc
-//@route
-//access
+//@desc Login to the system
+//@route /api/users/login
+//access PUBLIC
 const loginUser = async (req, res) => {
   res.send({ message: "Login Successfull" });
 };
 
-//@desc
-//@route
-//access
+//@desc Logout the user from the system
+//@route /api/users/user/logout/:id
+//access PRIVATE
 const logoutUser = async (req, res) => {
   res.send({ message: "Logout Successfull" });
 };
