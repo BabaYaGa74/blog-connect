@@ -16,25 +16,6 @@ const getAllUsers = async (req, res) => {
 //@desc
 //@route
 //access
-const createUser = async (req, res) => {
-  const { name, username, email, password } = req.body;
-  const userData = {
-    name,
-    username,
-    email,
-    password,
-  };
-  UserModel.create(userData, (err, result) => {
-    if (err) res.status(400).send("Error occurred during creation");
-    else {
-      res.status(200).send({ message: "User created successfully", result });
-    }
-  });
-};
-
-//@desc
-//@route
-//access
 const getUser = async (req, res) => {
   const { id } = req.params;
   UserModel.getUserById(id, (err, result) => {
@@ -79,7 +60,6 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
   getAllUsers,
-  createUser,
   getUser,
   updateUser,
   deleteUser,
