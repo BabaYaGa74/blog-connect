@@ -1,22 +1,57 @@
+const AuthModel = require("../models/authModel");
 //@desc Registers a new User
-//@route /api/users/register
+//@route /api/auth/register
 //access PUBLIC
 const registerUser = async (req, res) => {
-  res.send({ message: "Register Successful" });
+  const { name, username, email, password } = req.body;
+  const userData = {
+    name,
+    username,
+    email,
+    password,
+  };
+  AuthModel.register(userData, (err, result) => {
+    if (err) {
+      res.status(500).send("Error occured during register");
+      return;
+    } else {
+      res.status(200).send({ message: "User created successfully", result });
+    }
+  });
 };
 
 //@desc Login to the system
-//@route /api/users/login
+//@route /api/auth/login
 //access PUBLIC
 const loginUser = async (req, res) => {
-  res.send({ message: "Login Successfull" });
+  const { email, password } = req.body;
+  AuthModel.login({ email, password }, (err, results) => {
+    if (err) {
+      res.status(500).send("Error occured during login");
+      return;
+    } else {
+      if (results.length == 1) {
+        res.status(200).send({ message: "Logged in succesfully", results });
+      } else {
+        res.status(401).send("Invalid Credentials");
+      }
+    }
+  });
 };
 
 //@desc Logout the user from the system
-//@route /api/users/user/logout/:id
+//@route /api/auth/logout/:id
 //access PRIVATE
 const logoutUser = async (req, res) => {
-  res.send({ message: "Logout Successfull" });
+  const { id } = req.params;
+  AuthModel.logout(id, (err, results) => {
+    if (err) {
+      res.status(400).send("Error while loggin out");
+      return;
+    } else {
+      res.status(200).send("Logout Successful");
+    }
+  });
 };
 
 module.exports = {
