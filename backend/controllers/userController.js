@@ -1,8 +1,8 @@
 const UserModel = require("../models/UserModel");
 
-//@desc
-//@route
-//access
+//@desc Fetchs all the users
+//@route GET /api/users/
+//access Private
 const getAllUsers = async (req, res) => {
   UserModel.getAll((err, result) => {
     if (err) {
