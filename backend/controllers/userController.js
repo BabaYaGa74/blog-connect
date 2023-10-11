@@ -13,9 +13,9 @@ const getAllUsers = async (req, res) => {
   });
 };
 
-//@desc
-//@route
-//access
+//@desc Gets a single user
+//@route GET /api/users/user/:id
+//access Private
 const getUser = async (req, res) => {
   const { id } = req.params;
   UserModel.getUserById(id, (err, result) => {
@@ -27,9 +27,9 @@ const getUser = async (req, res) => {
   });
 };
 
-//@desc
-//@route
-//access
+//@desc Updates the user info
+//@route PUT /api/users/user/:id
+//access Private
 const updateUser = async (req, res) => {
   const { id } = req.params;
   const { name, username, email, password } = req.body;
@@ -45,9 +45,9 @@ const updateUser = async (req, res) => {
   });
 };
 
-//@desc
-//@route
-//access
+//@desc Deletes the user
+//@route Delete /api/users/user/:id
+//access Private
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   UserModel.delete(id, (error, result) => {
