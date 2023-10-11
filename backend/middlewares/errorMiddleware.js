@@ -1,3 +1,3 @@
 export const error = () => {
-  console.log("New error");
+  console.log("This is a error middleware");
 };
