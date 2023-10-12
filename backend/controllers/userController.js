@@ -21,6 +21,8 @@ const getUser = async (req, res) => {
   UserModel.getUserById(id, (err, result) => {
     if (err) {
       res.status(400).send({ success: false, err });
+    } else if (!result[0]) {
+      res.status(400).send({ success: false, message: "No User Found" });
     } else {
       res.status(200).send({ success: true, user: result[0] });
     }
