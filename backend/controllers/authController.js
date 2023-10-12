@@ -1,15 +1,12 @@
 const AuthModel = require("../models/authModel");
+const UserDTO = require("../dto/userDTO");
+
 //@desc Registers a new User
 //@route /api/auth/register
 //access PUBLIC
 const registerUser = async (req, res) => {
   const { name, username, email, password } = req.body;
-  const userData = {
-    name,
-    username,
-    email,
-    password,
-  };
+  const userData = new UserDTO(name, username, email, password);
   AuthModel.register(userData, (err, result) => {
     if (err) {
       res.status(500).send("Error occured during register");

@@ -1,4 +1,5 @@
 const UserModel = require("../models/UserModel");
+const UserDTO = require("../dto/userDTO");
 
 //@desc Fetchs all the users
 //@route GET /api/users/
@@ -35,7 +36,7 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { id } = req.params;
   const { name, username, email, password } = req.body;
-  const userData = { name, username, email, password };
+  const userData = new UserDTO(name, username, email, password);
   UserModel.update(id, userData, (error, result) => {
     if (error)
       res
