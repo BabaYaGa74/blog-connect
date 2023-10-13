@@ -39,10 +39,8 @@ const UserModel = {
     db.query(qry, [id], (err, result) => {
       if (err) {
         return callback(err, []);
-      } else if (result.length == 1) {
-        return callback(null, result);
       } else {
-        return callback(null, []);
+        return callback(null, result);
       }
     });
   },
