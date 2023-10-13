@@ -1,4 +1,4 @@
-const UserModel = require("../models/UserModel");
+const UserModel = require("../models/userModel");
 const UserDTO = require("../dto/userDTO");
 
 //@desc Fetchs all the users

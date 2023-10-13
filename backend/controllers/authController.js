@@ -1,5 +1,6 @@
 const AuthModel = require("../models/authModel");
 const UserDTO = require("../dto/userDTO");
+const token = require("../utils/generateToken");
 
 //@desc Registers a new User
 //@route /api/auth/register
@@ -28,6 +29,8 @@ const loginUser = async (req, res) => {
       return;
     } else {
       if (results.length == 1) {
+        const id = results[0].id;
+        token(id, res);
         res.status(200).send({ message: "Logged in succesfully", results });
       } else {
         res.status(401).send("Invalid Credentials");
