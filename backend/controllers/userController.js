@@ -1,4 +1,4 @@
-const UserModel = require("../models/userModel");
+const UserModel = require("../models/UserModel");
 const UserDTO = require("../dto/userDTO");
 
 //@desc Fetchs all the users
@@ -18,34 +18,30 @@ const getAllUsers = async (req, res) => {
 //@route GET /api/users/user/:id
 //access Private
 const getUser = async (req, res) => {
-  const { id } = req.params;
-  UserModel.getUserById(id, (err, result) => {
-    if (err) {
-      res.status(400).send({ success: false, err });
-    } else if (!result[0]) {
-      res.status(400).send({ success: false, message: "No User Found" });
-    } else {
-      res.status(200).send({ success: true, user: result[0] });
-    }
-  });
+  try {
+    const { id } = req.params;
+    const user = await UserModel.getUserById(id);
+    res.status(200).send({ success: true, user });
+  } catch (error) {
+    res.status(400).send({ success: false, error });
+  }
 };
 
 //@desc Updates the user info
 //@route PUT /api/users/user/:id
 //access Private
 const updateUser = async (req, res) => {
-  const { id } = req.params;
-  const { name, username, email, password } = req.body;
-  const userData = new UserDTO(name, username, email, password);
-  UserModel.update(id, userData, (error, result) => {
-    if (error)
-      res
-        .status(400)
-        .send({ success: false, message: "Error occurred during update" });
-    else {
-      res.status(200).send({ success: true, result });
-    }
-  });
+  try {
+    const { id } = req.params;
+    const { name, username, email, password } = req.body;
+    const userData = new UserDTO(name, username, email, password);
+    const updatedUser = await UserModel.update(id, userData);
+    res.status(200).send({ success: true, updatedUser });
+  } catch (error) {
+    res
+      .status(400)
+      .send({ success: false, message: "Error occurred during update" });
+  }
 };
 
 //@desc Deletes the user
