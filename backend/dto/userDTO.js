@@ -9,7 +9,7 @@ class UserDTO {
     }
 
     this.name = name;
-    this.usename = usename;
+    this.username = username;
     this.email = email;
     this.password = password;
   }
@@ -18,3 +18,5 @@ class UserDTO {
     return /\S+@\S+\.\S+/.test(email);
   }
 }
+
+module.exports = UserDTO;
