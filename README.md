@@ -1,10 +1,2 @@
 ##Random Project
-
-This is the ReadMe file of random project. This project is not intended for deployment.
-It is being developed just for practice purposes.
-This readme is being edited to increase the number of github contributions.
-
-Contribute to the github bro
-Lets make it 5 contributions
-Github contribution
-This is purely for the github contribution only.
+This is a readme file of college project. It uses mysql as the database and node js as the backend. React will be used in the frontend part. This is just a simple project.
