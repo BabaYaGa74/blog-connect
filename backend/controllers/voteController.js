@@ -1,5 +1,8 @@
+const VoteModel = require("../models/VoteModel");
+
 const getVotes = (req, res) => {
   console.log("get votes");
+  VoteModel.vote;
 };
 
 const vote = (req, res) => {
