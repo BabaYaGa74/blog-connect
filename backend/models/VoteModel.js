@@ -1,11 +1,11 @@
 const votemodel = () => {
   console.log("Model");
-  like: () => {
-    console.log("Like button");
+  vote: () => {
+    console.log("VOTE button");
   };
 
-  dislike: () => {
-    console.log("Dislike button");
+  unVote: () => {
+    console.log("UNVOTE button");
   };
 };
 
