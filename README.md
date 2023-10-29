@@ -1,2 +1,3 @@
-##Random Project
-This is a readme file of college project. It uses mysql as the database and node js as the backend. React will be used in the frontend part. This is just a simple project.
+# College Project
+
+This is just a college project that was made using node js in the backend and MYSQL as database. The frontend will be done using react js.
