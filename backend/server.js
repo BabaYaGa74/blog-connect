@@ -8,6 +8,7 @@ const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const postRoutes = require("./routes/postRoutes");
 const commentRoutes = require("./routes/commentRoutes");
+const voteRoutes = require("./routes/voteRoutes");
 const port = process.env.PORT || 8080;
 
 app.use(cors());
@@ -19,6 +20,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/post/comment", commentRoutes);
+app.use("/api/post/vote", voteRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on Port: ${port}`);
