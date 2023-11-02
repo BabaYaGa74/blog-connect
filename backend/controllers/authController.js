@@ -5,7 +5,7 @@ const token = require("../utils/generateToken");
 //@desc Registers a new User
 //@route /api/auth/register
 //access PUBLIC
-const registerUser = async (req, res) => {
+const registerUser = (req, res) => {
   const { name, username, email, password } = req.body;
   const userData = new UserDTO(name, username, email, password);
   AuthModel.register(userData, (err, result) => {
@@ -21,7 +21,7 @@ const registerUser = async (req, res) => {
 //@desc Login to the system
 //@route /api/auth/login
 //access PUBLIC
-const loginUser = async (req, res) => {
+const loginUser = (req, res) => {
   const { email, password } = req.body;
   AuthModel.login({ email, password }, (err, results) => {
     if (err) {
@@ -42,7 +42,7 @@ const loginUser = async (req, res) => {
 //@desc Logout the user from the system
 //@route /api/auth/logout/:id
 //access PRIVATE
-const logoutUser = async (req, res) => {
+const logoutUser = (req, res) => {
   const { id } = req.params;
   AuthModel.logout(id, (err, results) => {
     if (err) {
@@ -54,8 +54,19 @@ const logoutUser = async (req, res) => {
   });
 };
 
+const reFetchUser = (req, res) => {
+  try {
+    const user = req.user;
+    console.log(user);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).send({ message: "Internal server error!", Error: error });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   logoutUser,
+  reFetchUser,
 };
