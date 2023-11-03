@@ -11,7 +11,13 @@ const commentRoutes = require("./routes/commentRoutes");
 const voteRoutes = require("./routes/voteRoutes");
 const port = process.env.PORT || 8080;
 
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:5173",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
