@@ -8,6 +8,7 @@ const {
   deletePost,
   getUserPost,
 } = require("../controllers/postController");
+const protect = require("../middlewares/authMiddleware");
 
 router.post("/create", createPost);
 router.get("/all", getAllPosts);
