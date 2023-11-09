@@ -9,10 +9,6 @@ const {
 const protect = require("../middlewares/authMiddleware");
 
 router.get("/", getAllUsers);
-router
-  .route("/user/:id")
-  .get(protect, getUser)
-  .put(protect, updateUser)
-  .delete(protect, deleteUser);
+router.route("/user/:id").get(getUser).put(updateUser).delete(deleteUser);
 
 module.exports = router;
