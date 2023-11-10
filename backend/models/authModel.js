@@ -23,7 +23,6 @@ const AuthModel = {
       if (err) {
         return callback(err);
       }
-
       if (results.length !== 1) {
         return callback(null, []);
       }
