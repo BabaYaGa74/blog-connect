@@ -28,6 +28,7 @@ const loginUser = (req, res) => {
       res.status(500).send("Error occured during login");
       return;
     } else {
+      console.log(results);
       if (results.length == 1) {
         const id = results[0].id;
         token(id, res);
@@ -35,21 +36,6 @@ const loginUser = (req, res) => {
       } else {
         res.status(401).send("Invalid Credentials");
       }
-    }
-  });
-};
-
-//@desc Logout the user from the system
-//@route /api/auth/logout/:id
-//access PRIVATE
-const logoutUser = (req, res) => {
-  const { id } = req.params;
-  AuthModel.logout(id, (err, results) => {
-    if (err) {
-      res.status(400).send("Error while loggin out");
-      return;
-    } else {
-      res.status(200).send("Logout Successful");
     }
   });
 };
@@ -67,6 +53,5 @@ const reFetchUser = (req, res) => {
 module.exports = {
   registerUser,
   loginUser,
-  logoutUser,
   reFetchUser,
 };
