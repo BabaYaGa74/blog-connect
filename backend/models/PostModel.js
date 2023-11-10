@@ -2,18 +2,14 @@ const db = require("../config/dbConfig");
 
 const PostModel = {
   create: (userData) => {
-    const { title, description, username, userId, category } = userData;
+    const { title, description, username, userId } = userData;
     return new Promise((resolve, reject) => {
       const qry =
-        "INSERT INTO posts (title, description, username, userId, category) VALUES (?,?,?,?,?)";
-      db.query(
-        qry,
-        [title, description, username, userId, category],
-        (err, result) => {
-          if (err) return reject(err);
-          return resolve(result);
-        }
-      );
+        "INSERT INTO posts (title, description, username, userId) VALUES (?,?,?,?)";
+      db.query(qry, [title, description, username, userId], (err, result) => {
+        if (err) return reject(err);
+        return resolve(result);
+      });
     });
   },
 
@@ -38,11 +34,10 @@ const PostModel = {
   },
 
   updatePost: (userData, id) => {
-    const { title, description, category } = userData;
+    const { title, description } = userData;
     return new Promise((resolve, reject) => {
-      const qry =
-        "UPDATE posts SET title=?, description=?, category=? WHERE postId =?";
-      db.query(qry, [title, description, category, id], (err, result) => {
+      const qry = "UPDATE posts SET title=?, description=? WHERE postId =?";
+      db.query(qry, [title, description, id], (err, result) => {
         if (err) return reject(err);
         return resolve(result);
       });
