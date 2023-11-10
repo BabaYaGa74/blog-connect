@@ -2,13 +2,12 @@ const PostModel = require("../models/PostModel");
 
 const createPost = async (req, res) => {
   try {
-    const { title, description, username, userId, category } = req.body;
+    const { title, description, username, userId } = req.body;
     const userData = {
       title,
       description,
       username,
       userId,
-      category,
     };
     const result = await PostModel.create(userData);
     res.status(201).send({ message: "Post created successfully!", result });
@@ -21,7 +20,6 @@ const createPost = async (req, res) => {
 const getAllPosts = async (req, res) => {
   try {
     const posts = await PostModel.allPosts();
-    console.log(posts);
     res.status(200).send({ message: "Posts found!", posts });
   } catch (error) {
     console.error("Cannot fetch posts", error);
@@ -33,7 +31,6 @@ const getSinglePost = async (req, res) => {
   try {
     const { id } = req.params;
     const post = await PostModel.singlePost(id);
-    console.log(post);
     res.status(200).send({ message: "Post found!", post: post[0] });
   } catch (error) {
     console.error("Cannot fetch the post", error);
@@ -43,12 +40,9 @@ const getSinglePost = async (req, res) => {
 
 const updatePost = async (req, res) => {
   try {
-    const { title, description, category } = req.body;
+    const { title, description } = req.body;
     const { id } = req.params;
-    const updatedPost = await PostModel.updatePost(
-      { title, description, category },
-      id
-    );
+    const updatedPost = await PostModel.updatePost({ title, description }, id);
     res
       .status(200)
       .send({ message: "Post updated Successfully!", updatedPost });
@@ -62,7 +56,6 @@ const deletePost = async (req, res) => {
   try {
     const { id } = req.params;
     const deletedPost = await PostModel.delete(id);
-    console.log(deletedPost);
     res.status(200).send({ Message: "Post Deleted Successfully", deletedPost });
   } catch (error) {
     console.error("Cannot delete the post", error);
@@ -74,7 +67,6 @@ const getUserPost = async (req, res) => {
   try {
     const { id } = req.params;
     const userPosts = await PostModel.userPost(id);
-    console.log(userPosts);
     res
       .status(200)
       .send({ message: "User's post fetched successfully!", userPosts });
