@@ -14,8 +14,9 @@ const createComment = async (req, res) => {
 
 const fetchComment = async (req, res) => {
   try {
-    const { postId } = req.body;
-    const result = await CommentModel.getAll(postId);
+    const { id } = req.params;
+    const result = await CommentModel.getAll(id);
+    console.log(result);
     res.status(200).send({ message: "All comments: ", result });
   } catch (error) {
     console.error("ERROR While fetching", error);
