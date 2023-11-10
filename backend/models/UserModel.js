@@ -1,4 +1,6 @@
 const db = require("../config/dbConfig");
+const bcrypt = require("bcryptjs");
+const SALT = 10;
 
 const UserModel = {
   getAll: (callback) => {
@@ -25,15 +27,25 @@ const UserModel = {
   update: (id, userData) => {
     return new Promise((resolve, reject) => {
       const { name, username, email, password } = userData;
-      const qry =
-        "UPDATE users SET name=?, username=?, email=?, password=? WHERE id = ?";
-      db.query(qry, [name, username, email, password, id], (err, result) => {
+      bcrypt.hash(password, SALT, (err, hashedPassword) => {
         if (err) {
-          reject(err);
-        } else if (result.length == 1) {
-          resolve(result);
+          return callback(err);
         } else {
-          resolve([]);
+          const qry =
+            "UPDATE users SET name=?, username=?, email=?, password=? WHERE id = ?";
+          db.query(
+            qry,
+            [name, username, email, hashedPassword, id],
+            (err, result) => {
+              if (err) {
+                reject(err);
+              } else if (result.length == 1) {
+                resolve(result);
+              } else {
+                resolve([]);
+              }
+            }
+          );
         }
       });
     });
