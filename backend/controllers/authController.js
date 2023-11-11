@@ -40,6 +40,22 @@ const loginUser = (req, res) => {
   });
 };
 
+//@desc   Logs out of the app
+//@routes POST /api/auth/logout
+//@access private
+const logoutUser = (req, res) => {
+  try {
+    res.cookie("jwtToken", "", {
+      httpOnly: true,
+      maxAge: 0,
+      secure: process.env.NODE_ENV !== "development",
+    });
+    res.status(200).send({ message: "Logged Out Successfully!" });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 const reFetchUser = (req, res) => {
   try {
     const user = req.user;
@@ -54,4 +70,5 @@ module.exports = {
   registerUser,
   loginUser,
   reFetchUser,
+  logoutUser,
 };
