@@ -8,7 +8,7 @@ const {
 } = require("../controllers/commentController");
 
 router.post("/create", createComment);
-router.get("/all", fetchComment);
+router.get("/all/:id", fetchComment);
 router.put("/update/:id", updateComment);
 router.delete("/delete/:id", deleteComment);
 
