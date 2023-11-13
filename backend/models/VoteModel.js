@@ -11,10 +11,10 @@ const votemodel = {
     });
   },
 
-  allVotes: (postId, voteType) => {
+  allVotes: (postId) => {
     return new Promise((resolve, reject) => {
-      const qry = "SELECT * FROM vote WHERE postId = ? AND voteType = ?";
-      db.query(qry, [postId, voteType], (err, result) => {
+      const qry = "SELECT * FROM vote WHERE postId = ?";
+      db.query(qry, [postId], (err, result) => {
         if (err) return reject(err);
 
         return resolve(result);
