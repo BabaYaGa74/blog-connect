@@ -1,3 +1,3 @@
 # College Project
 
-This is just for the contribution in github
+Lets contribute to github for the sake of contributing to it.
