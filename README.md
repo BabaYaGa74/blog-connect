@@ -1,4 +1,3 @@
 # College Project
 
-This is a simple college project.
-THi is a update to increase the contribution to github
+This is just for the contribution in github
