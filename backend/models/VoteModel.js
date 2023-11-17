@@ -1,12 +1,12 @@
 const db = require("../config/dbConfig");
 
 const votemodel = {
-  vote: async (postId, userId) => {
+  vote: (postId, userId) => {
     const query = "INSERT INTO vote (postId, userId) VALUES (?, ?)";
     const values = [postId, userId];
 
     try {
-      await db.query(query, values);
+      db.query(query, values);
       return { success: true, message: "Vote recorded successfully." };
     } catch (error) {
       console.error("Error voting:", error);
@@ -14,13 +14,12 @@ const votemodel = {
     }
   },
 
-  // Function to unvote a post
-  unvote: async () => {
+  unvote: async (postId, userId) => {
     const query = "DELETE FROM votes WHERE post_id = ? AND user_id = ?";
-    const values = [this.postId, this.userId];
+    const values = [postId, userId];
 
     try {
-      await db.query(query, values);
+      db.query(query, values);
       return { success: true, message: "Vote removed successfully." };
     } catch (error) {
       console.error("Error unvoting:", error);
