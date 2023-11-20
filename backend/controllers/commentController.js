@@ -16,7 +16,6 @@ const fetchComment = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await CommentModel.getAll(id);
-    console.log(result);
     res.status(200).send({ message: "All comments: ", result });
   } catch (error) {
     console.error("ERROR While fetching", error);
