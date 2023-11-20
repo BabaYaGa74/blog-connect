@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { getVotes, vote, unVote } = require("../controllers/voteController");
 
-router.get("/", getVotes);
-router.post("/", vote);
-router.delete("/", unVote);
+router.post("/", getVotes);
+router.post("/up", vote);
+router.delete("/down", unVote);
 
 module.exports = router;
