@@ -12,13 +12,35 @@ const votemodel = {
     });
   },
 
-  unvote: async (postId, userId) => {
+  unvote: (postId, userId) => {
     return new Promise((resolve, reject) => {
-      const query = "DELETE FROM votes WHERE postId = ? AND userId = ?";
-      const values = [postId, userId];
+      const query = "DELETE FROM vote WHERE userId = ? AND postId = ?";
+      const values = [userId, postId];
       db.query(query, values, (err, result) => {
+        if (err) {
+          db.rollback(() => {
+            reject(err);
+          });
+        } else {
+          db.commit((err) => {
+            if (err) {
+              db.rollback(() => {
+                reject(err);
+              });
+            } else {
+              resolve(result);
+            }
+          });
+        }
+      });
+    });
+  },
+  getVoteCount: (postId) => {
+    return new Promise((resolve, reject) => {
+      const qry = "SELECT COUNT(*) AS voteCount FROM vote WHERE postId = ?";
+      db.query(qry, [postId], (err, result) => {
         if (err) reject(err);
-        else resolve(result);
+        else resolve(result[0].voteCount);
       });
     });
   },
