@@ -23,17 +23,15 @@ const vote = async (req, res) => {
   }
 };
 
-const unVote = async (req, res) => {
+const downVote = async (req, res) => {
   try {
     const { userId, postId } = req.body;
-    const result = await VoteModel.unvote(postId, userId);
-    console.log("Result:", result);
+    const result = await VoteModel.downvote(postId, userId);
     const voteCount = await VoteModel.getVoteCount(postId);
-    console.log("Vote Count: ", voteCount);
     res.status(200).send({ success: "true", unVote: result, voteCount });
   } catch (error) {
     res.status(400).send("Unable to unvote!!");
   }
 };
 
-module.exports = { getVotes, vote, unVote };
+module.exports = { getVotes, vote, downVote };
