@@ -37,6 +37,9 @@ const votemodel = {
       function queryChecker() {
         if (queryCount == 2) {
           totalVotes = upvotes - downvotes;
+          if (totalVotes < 0) {
+            totalVotes = 0;
+          }
           resolve(totalVotes);
         }
       }
@@ -61,6 +64,33 @@ const votemodel = {
           queryCount++;
           queryChecker();
         }
+      });
+    });
+  },
+
+  checkUser: (postId, userId) => {
+    return new Promise((resolve, reject) => {
+      const qry = "SELECT * FROM vote WHERE postId=? AND userId=?";
+      db.query(qry, [postId, userId], (err, result) => {
+        if (err) reject(err);
+        else {
+          if (result.length > 0) {
+            resolve(result[0].voteType);
+          } else {
+            resolve(false);
+          }
+        }
+      });
+    });
+  },
+
+  deleteVote: (postId, userId, voteType) => {
+    return new Promise((resolve, reject) => {
+      const qry =
+        "DELETE FROM vote WHERE postId =? AND userId=? AND voteType =?";
+      db.query(qry, [postId, userId, voteType], (err, result) => {
+        if (err) reject(err);
+        else resolve(result);
       });
     });
   },
