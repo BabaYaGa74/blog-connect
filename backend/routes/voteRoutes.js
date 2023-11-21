@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { getVotes, vote, unVote } = require("../controllers/voteController");
+const { getVotes, vote, downVote } = require("../controllers/voteController");
 
 router.post("/", getVotes);
 router.post("/up", vote);
-router.delete("/down", unVote);
+router.post("/down", downVote);
 
 module.exports = router;
