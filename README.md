@@ -1,4 +1,69 @@
-# College Project
+# NodeReact Blog
 
-Lets contribute to github for the sake of contributing to it.
-This is a last contribution to it/
+NodeReact Blog is a simple yet powerful blog application built using Node.js in the backend, React.js in the frontend, Tailwind CSS for styling, and MySQL as the database. This application provides users with the ability to register, log in, and log out securely, with JWT protection ensuring the security of user sessions. User passwords are hashed before being stored in the database, enhancing data security.
+
+## Features
+
+- **User Authentication:** Users can register, log in, and log out securely. JWT protection ensures the security of user sessions.
+
+- **Blog Management:** Users can create, update, and delete blog posts. Each blog post includes a title and description.
+
+- **Comment System:** Users can comment on blog posts. Authors have the ability to update and delete comments.
+
+- **Voting System:** A robust voting system allows users to vote on blog posts. The voting score is determined by calculating the difference between total upvotes and total downvotes for each post.
+
+- **Account Management:** Users can update their account information and also choose to delete their accounts.
+
+## Tech Stack
+
+- **Backend:** Node.js
+- **Frontend:** React.js
+- **Styling:** Tailwind CSS
+- **Database:** MySQL
+
+## Setup
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/nodereact-blog.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd nodereact-blog
+   ```
+
+3. Install dependencies for both backend and frontend:
+
+   ```bash
+   cd backend
+   npm install
+   cd ../frontend
+   npm install
+   ```
+
+4. Configure the MySQL database by updating the `config.js` file in the `backend` directory with your database credentials.
+
+5. Run the application:
+
+   ```bash
+   # Start the backend server
+   cd backend
+   npm start
+
+   # Start the frontend
+   cd ../frontend
+   npm start
+   ```
+
+6. Open your browser and navigate to `http://localhost:3000` to use the NodeReact Blog application.
+
+## Contributing
+
+Contributions are welcome! If you find a bug or have a feature suggestion, please open an issue. If you want to contribute code, please fork the repository and create a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
