@@ -26,7 +26,7 @@ NodeReact Blog is a simple yet powerful blog application built using Node.js in 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/nodereact-blog.git
+   git clone https://github.com/BabaYaGa74/project.git
    ```
 
 2. Navigate to the project directory:
@@ -44,26 +44,18 @@ NodeReact Blog is a simple yet powerful blog application built using Node.js in 
    npm install
    ```
 
-4. Configure the MySQL database by updating the `config.js` file in the `backend` directory with your database credentials.
+4. Configure the MySQL database by updating the `dbConfig.js` file in the `./backend/config/` directory with your database credentials.
 
 5. Run the application:
 
    ```bash
    # Start the backend server
    cd backend
-   npm start
+   npm run server
 
    # Start the frontend
    cd ../frontend
-   npm start
+   npm run dev
    ```
 
-6. Open your browser and navigate to `http://localhost:3000` to use the NodeReact Blog application.
-
-## Contributing
-
-Contributions are welcome! If you find a bug or have a feature suggestion, please open an issue. If you want to contribute code, please fork the repository and create a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+6. Open your browser and navigate to `http://localhost:5173` to use the NodeReact Blog application.
