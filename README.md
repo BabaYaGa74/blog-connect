@@ -1,6 +1,6 @@
-# NodeReact Blog
+# Blog Connect
 
-NodeReact Blog is a simple yet powerful blog application built using Node.js in the backend, React.js in the frontend, Tailwind CSS for styling, and MySQL as the database. This application provides users with the ability to register, log in, and log out securely, with JWT protection ensuring the security of user sessions. User passwords are hashed before being stored in the database, enhancing data security.
+Blog Connect is a simple yet powerful blog application built using Node.js in the backend, React.js in the frontend, Tailwind CSS for styling, and MySQL as the database. This application provides users with the ability to register, log in, and log out securely, with JWT protection ensuring the security of user sessions. User passwords are hashed before being stored in the database, enhancing data security.
 
 ## Features
 
@@ -26,13 +26,13 @@ NodeReact Blog is a simple yet powerful blog application built using Node.js in 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/BabaYaGa74/project.git
+   git clone https://github.com/BabaYaGa74/blog-connect.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd nodereact-blog
+   cd blog-connect
    ```
 
 3. Install dependencies for both backend and frontend:
