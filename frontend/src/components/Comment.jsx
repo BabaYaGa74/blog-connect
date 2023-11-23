@@ -31,8 +31,6 @@ const Comment = ({ c, onCommentDelete, onCommentEdit }) => {
         }
       );
       onCommentEdit(id, res.data.result.content);
-      // setContent(res.data.result.content);
-      // window.location.reload(true);
       setIsOpen(false);
     } catch (error) {
       console.log(error);
