@@ -35,7 +35,7 @@ const EditPost = () => {
     };
 
     try {
-      const res = await axios.put(URL + "/api/posts/post/" + postId, post, {
+      await axios.put(URL + "/api/posts/post/" + postId, post, {
         withCredentials: true,
       });
       navigate("/posts/post/" + postId);
