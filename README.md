@@ -1,6 +1,6 @@
 # Blog Connect
 
-Blog Connect is a simple yet powerful blog application built using Node.js in the backend, React.js in the frontend, Tailwind CSS for styling, and MySQL as the database. This application provides users with the ability to register, log in, and log out securely, with JWT protection ensuring the security of user sessions. User passwords are hashed before being stored in the database, enhancing data security.
+Blog Connect is a simple yet powerful blog application crafted for a college project using Node.js in the backend, React.js in the frontend, Tailwind CSS for styling, and MySQL as the database. This application provides users with the ability to register, log in, and log out securely, with JWT protection ensuring the security of user sessions. User passwords are hashed before being stored in the database, enhancing data security.
 
 ## Features
 
