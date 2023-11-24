@@ -37,9 +37,6 @@ const votemodel = {
       function queryChecker() {
         if (queryCount == 2) {
           totalVotes = upvotes - downvotes;
-          if (totalVotes < 0) {
-            totalVotes = 0;
-          }
           resolve(totalVotes);
         }
       }
