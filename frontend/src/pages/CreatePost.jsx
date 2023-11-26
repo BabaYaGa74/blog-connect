@@ -1,18 +1,54 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { ImCross } from "react-icons/im";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { UserContext } from "../context/UserContext";
 import { URL } from "../url";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import JoditEditor from "jodit-react";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const { user } = useContext(UserContext);
-
+  const editor = useRef(null);
   const navigate = useNavigate();
+
+  const config = {
+    spellcheck: false,
+    readonly: false,
+    placeholder: "Start typings...",
+    minHeight: 400,
+    buttons: [
+      "source",
+      "|",
+      "bold",
+      "italic",
+      "|",
+      "ul",
+      "ol",
+      "|",
+      "font",
+      "fontsize",
+      "brush",
+      "paragraph",
+      "|",
+      "table",
+      "link",
+      "|",
+      "left",
+      "center",
+      "right",
+      "justify",
+      "|",
+      "undo",
+      "redo",
+      "|",
+      "hr",
+      "eraser",
+      "fullsize",
+    ],
+  };
 
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -48,12 +84,12 @@ const CreatePost = () => {
             className="px-4 py-2 outline-none text-white border-2 border-white bg-gray-900"
           />
 
-          <textarea
-            onChange={(e) => setDesc(e.target.value)}
-            rows={15}
-            cols={30}
-            className="px-4 py-2 outline-none text-white border-2 border-white bg-gray-900"
-            placeholder="Enter post description"
+          <JoditEditor
+            ref={editor}
+            value={desc}
+            config={config}
+            tabIndex={1}
+            onBlur={(newContent) => setDesc(newContent)} //preferred to use only this option to update the content for performance reasons
           />
           <button
             onClick={handleCreate}
