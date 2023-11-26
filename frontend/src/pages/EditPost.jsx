@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { URL } from "../url";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import JoditEditor from "jodit-react";
 
 const EditPost = () => {
   const postId = useParams().id;
@@ -12,12 +13,49 @@ const EditPost = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const editor = useRef(null);
+  const config = {
+    spellcheck: false,
+    readonly: false,
+    placeholder: "Start typings...",
+    minHeight: 400,
+    buttons: [
+      "source",
+      "|",
+      "bold",
+      "italic",
+      "|",
+      "ul",
+      "ol",
+      "|",
+      "font",
+      "fontsize",
+      "brush",
+      "paragraph",
+      "|",
+      "table",
+      "link",
+      "|",
+      "left",
+      "center",
+      "right",
+      "justify",
+      "|",
+      "undo",
+      "redo",
+      "|",
+      "hr",
+      "eraser",
+      "fullsize",
+    ],
+  };
 
   const fetchPost = async () => {
     try {
       const res = await axios.get(URL + "/api/posts/post/" + postId);
       console.log(res.data);
       setTitle(res.data.post.title);
+
       setDescription(res.data.post.description);
     } catch (err) {
       console.log(err);
@@ -63,15 +101,15 @@ const EditPost = () => {
             placeholder="Enter post title"
             className="px-4 py-2 outline-none text-white border-2 border-white bg-gray-900"
           />
-
-          <textarea
-            onChange={(e) => setDescription(e.target.value)}
+          <JoditEditor
+            ref={editor}
             value={description}
-            rows={15}
-            cols={30}
-            className="px-4 py-2 outline-none  text-white border-2 border-white bg-gray-900"
-            placeholder="Enter post description"
+            config={config}
+            tabIndex={1}
+            onBlur={(newContent) => setDescription(newContent)}
+            setContent={description}
           />
+
           <button
             onClick={handleUpdate}
             className="bg-gray-800 w-full md:w-[20%] mx-auto text-white border-white border-2 font-semibold px-4 py-2 md:text-xl text-lg hover:bg-black"
