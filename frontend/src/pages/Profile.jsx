@@ -5,12 +5,10 @@ import ProfilePosts from "../components/ProfilePosts";
 import axios from "axios";
 import { URL } from "../url";
 import { UserContext } from "../context/UserContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const param = useParams().id;
-  console.log("Param: ", param);
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,7 +25,7 @@ const Profile = () => {
       setName(res.data.user.name);
       setUsername(res.data.user.username);
       setEmail(res.data.user.email);
-      setPassword("password");
+      setPassword(res.data.user.password);
     } catch (err) {
       console.log(err);
     }
@@ -51,7 +49,7 @@ const Profile = () => {
 
   const handleUserDelete = async () => {
     try {
-      const res = await axios.delete(URL + "/api/users/user" + user.userId, {
+      await axios.delete(URL + "/api/users/user" + user.userId, {
         withCredentials: true,
       });
       setUser(null);
@@ -63,10 +61,7 @@ const Profile = () => {
   const fetchUserPosts = async () => {
     try {
       const res = await axios.get(URL + "/api/posts/post/user/" + user.userId);
-      console.log(res.data.userPosts);
       setPosts(res.data.userPosts);
-
-      console.log("posts from profile: ", posts);
     } catch (err) {
       console.log(err);
     }
