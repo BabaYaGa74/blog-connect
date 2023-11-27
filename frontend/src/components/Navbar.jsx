@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <div className="flex items-center justify-between px-6 md:px-[200px] py-4 bg-gray-950">
       <h1 className="text-lg md:text-xl font-extrabold text-orange-600">
-        <Link to="/">Blog Market</Link>
+        <Link to="/">Blog Connect</Link>
       </h1>
       <div className="hidden md:flex items-center justify-center space-x-2 md:space-x-4 text-orange-500">
         {user ? (
