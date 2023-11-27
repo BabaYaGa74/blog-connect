@@ -3,6 +3,7 @@ import { UserContext } from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import { URL } from "../url";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Menu = () => {
   const { user, setUser } = useContext(UserContext);
@@ -15,6 +16,13 @@ const Menu = () => {
         withCredentials: true,
       });
       setUser(null);
+      setTimeout(() => {
+        toast.success("Logged out successfully", {
+          autoClose: 2000,
+          position: toast.POSITION.TOP_RIGHT,
+          theme: "dark",
+        });
+      }, 100);
       navigate("/login");
     } catch (err) {
       console.log(err);
