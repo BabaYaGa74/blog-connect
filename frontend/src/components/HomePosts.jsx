@@ -10,12 +10,16 @@ const HomePosts = ({ post }) => {
               <p>{new Date(post.createdAt).toString().slice(16, 24)}</p>
             </div>
           </div>
-          <h1 className="flex text-xl font-bold mb-2 md:text-2xl text-center">
+          <h1 className="flex text-xl font-bold mb-2 md:text-2xl">
             {post.title}
           </h1>
-          <p className="flex text-sm md:text-lg">
-            {post.description?.slice(0, 200)}{" "}
-          </p>
+          <p
+            className="text-sm md:text-lg overflow-clip"
+            dangerouslySetInnerHTML={{
+              __html: post.description?.slice(0, 200),
+            }}
+          />
+
           {post.description?.length > 200 ? (
             <span className="text-gray-500 ">Read more</span>
           ) : null}
