@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 const Votes = ({ userId, postId }) => {
   const [voteCount, setVoteCount] = useState(0);
+  const [msg, setMsg] = useState(false);
 
   const upVote = async () => {
     try {
@@ -18,7 +19,10 @@ const Votes = ({ userId, postId }) => {
       if (res.data.success === true) {
         setVoteCount(res.data.voteCount);
       } else {
-        console.log("ALready voted");
+        setTimeout(() => {
+          setMsg(false);
+        }, 3000);
+        setMsg(true);
       }
     } catch (error) {
       console.log(error);
@@ -35,7 +39,10 @@ const Votes = ({ userId, postId }) => {
       if (res.data.success === true) {
         setVoteCount(res.data.voteCount);
       } else {
-        console.log("Already voted once!");
+        setTimeout(() => {
+          setMsg(false);
+        }, 3000);
+        setMsg(true);
       }
     } catch (error) {
       console.log(error);
@@ -70,6 +77,11 @@ const Votes = ({ userId, postId }) => {
       >
         <BiDownvote className="text-lg" />
       </button>
+      {msg && (
+        <p className="flex items-center gap-1 text-red-500 ">
+          Cannot vote more than once!
+        </p>
+      )}
     </h3>
   );
 };
