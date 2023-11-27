@@ -72,7 +72,7 @@ const Comment = ({ c, onCommentDelete, onCommentEdit }) => {
           )}
         </div>
       </div>
-      <p className="px-4 mt-2 flex justify-between">
+      <p className="px-4 mt-2 flex gap-4 justify-between">
         {!isOpen ? (
           content
         ) : (
@@ -84,10 +84,16 @@ const Comment = ({ c, onCommentDelete, onCommentEdit }) => {
               className="px-4 py-2 outline-none w-[90%]"
             />
             <button
-              className=" bg-black text-white rounded-lg p-2 "
+              className=" bg-black text-white rounded-lg p-2 hover:bg-gray-700"
               onClick={() => handleEditComment(c.commentId)}
             >
               Update
+            </button>
+            <button
+              className=" bg-black text-white rounded-lg p-2 hover:bg-gray-700  "
+              onClick={() => setIsOpen(false)}
+            >
+              Cancel
             </button>
           </>
         )}
