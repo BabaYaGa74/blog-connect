@@ -12,9 +12,12 @@ const ProfilePosts = ({ p }) => {
         {/* <p className="text-sm md:text-lg text-white">
           {p.description + " ...Read more"}
         </p> */}
-        <p className="flex text-sm md:text-lg text-gray-300">
-          {p.description?.slice(0, 200)}{" "}
-        </p>
+        <p
+          className="text-sm md:text-lg overflow-clip text-gray-300"
+          dangerouslySetInnerHTML={{
+            __html: p.description?.slice(0, 200),
+          }}
+        />
         {p.description?.length > 200 ? (
           <span className="text-gray-500 ">Read more</span>
         ) : null}
