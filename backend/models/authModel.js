@@ -3,17 +3,16 @@ const bcrypt = require("bcryptjs");
 const SALT = 10;
 
 const AuthModel = {
-  register: (userdata, callback) => {
-    const { name, username, email, password } = userdata;
-    bcrypt.hash(password, SALT, (err, hashedPassword) => {
-      if (err) {
-        return callback(err);
-      } else {
-        const qry =
-          "INSERT INTO users (name, username, email, password) VALUES (?,?,?,?)";
-        db.query(qry, [name, username, email, hashedPassword], callback);
-      }
-    });
+  register: async (userdata, callback) => {
+    try {
+      const { name, username, email, password } = userdata;
+      const hashedPassword = await bcrypt.hash(password, SALT);
+      const qry =
+        "INSERT INTO users (name, username, email, password) VALUES (?,?,?,?)";
+      db.query(qry, [name, username, email, hashedPassword], callback);
+    } catch (error) {
+      callback(error);
+    }
   },
 
   login: (userdata, callback) => {
@@ -37,11 +36,6 @@ const AuthModel = {
         return callback(null, []);
       }
     });
-  },
-
-  logout: (id, callback) => {
-    const sql = "SELECT * FROM users where id = ?";
-    db.query(sql, [id], callback);
   },
 };
 

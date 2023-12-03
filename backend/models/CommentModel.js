@@ -12,7 +12,6 @@ const CommentModel = {
       });
     });
   },
-
   getAll: (id) => {
     return new Promise((resolve, reject) => {
       const qry = "SELECT * FROM comments WHERE postId = ?";
@@ -31,7 +30,6 @@ const CommentModel = {
       });
     });
   },
-
   remove: (id) => {
     return new Promise((resolve, reject) => {
       const qry = "DELETE FROM comments WHERE commentId=?";
