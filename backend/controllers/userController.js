@@ -1,9 +1,6 @@
 const UserModel = require("../models/UserModel");
 const UserDTO = require("../dto/userDTO");
 
-//@desc Fetchs all the users
-//@route GET /api/users/
-//access Private
 const getAllUsers = async (req, res) => {
   UserModel.getAll((err, result) => {
     if (err) {
@@ -14,9 +11,6 @@ const getAllUsers = async (req, res) => {
   });
 };
 
-//@desc Gets a single user
-//@route GET /api/users/user/:id
-//access Private
 const getUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -27,9 +21,6 @@ const getUser = async (req, res) => {
   }
 };
 
-//@desc Updates the user info
-//@route PUT /api/users/user/:id
-//access Private
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -44,9 +35,6 @@ const updateUser = async (req, res) => {
   }
 };
 
-//@desc Deletes the user
-//@route Delete /api/users/user/:id
-//access Private
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   UserModel.delete(id, (error, result) => {

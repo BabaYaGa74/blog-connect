@@ -2,9 +2,6 @@ const AuthModel = require("../models/authModel");
 const UserDTO = require("../dto/userDTO");
 const token = require("../utils/generateToken");
 
-//@desc Registers a new User
-//@route /api/auth/register
-//access PUBLIC
 const registerUser = (req, res) => {
   const { name, username, email, password } = req.body;
   const userData = new UserDTO(name, username, email, password);
@@ -18,9 +15,6 @@ const registerUser = (req, res) => {
   });
 };
 
-//@desc Login to the system
-//@route /api/auth/login
-//access PUBLIC
 const loginUser = (req, res) => {
   const { email, password } = req.body;
   AuthModel.login({ email, password }, (err, results) => {
@@ -40,9 +34,6 @@ const loginUser = (req, res) => {
   });
 };
 
-//@desc   Logs out of the app
-//@routes POST /api/auth/logout
-//@access private
 const logoutUser = (req, res) => {
   try {
     res.cookie("jwtToken", "", {

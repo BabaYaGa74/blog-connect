@@ -3,13 +3,13 @@ const PostModel = require("../models/PostModel");
 const createPost = async (req, res) => {
   try {
     const { title, description, username, userId } = req.body;
-    const userData = {
+    const postData = {
       title,
       description,
       username,
       userId,
     };
-    const result = await PostModel.create(userData);
+    const result = await PostModel.create(postData);
     res.status(201).send({ message: "Post created successfully!", result });
   } catch (error) {
     console.error("Error occured during creation", error);
