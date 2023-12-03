@@ -6,6 +6,7 @@ import { URL } from "../url";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import JoditEditor from "jodit-react";
+import { toast } from "react-toastify";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -63,6 +64,13 @@ const CreatePost = () => {
       await axios.post(URL + "/api/posts/create", post, {
         withCredentials: true,
       });
+      setTimeout(() => {
+        toast.success("Post created successfully!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000,
+          theme: "dark",
+        });
+      }, 100);
       navigate("/");
     } catch (err) {
       console.log(err);

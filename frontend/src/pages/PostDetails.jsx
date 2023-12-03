@@ -2,12 +2,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import Comment from "../components/Comment";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { BiUpvote, BiDownvote, BiEdit } from "react-icons/bi";
-
+import { BiEdit } from "react-icons/bi";
+import { toast } from "react-toastify";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
 import { URL } from "../url";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import Loader from "../components/Loader";
 import Votes from "../components/Votes";
@@ -15,10 +15,12 @@ import Votes from "../components/Votes";
 const PostDetails = () => {
   const postId = useParams().id;
   const [post, setPost] = useState({});
-  const { user, getUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const [loader, setLoader] = useState(false);
+  const commentInputRef = useRef(null);
+
   const navigate = useNavigate();
 
   const fetchPost = async () => {
@@ -37,6 +39,13 @@ const PostDetails = () => {
         withCredentials: true,
       });
       console.log(res.data.post);
+      setTimeout(() => {
+        toast.success("Post deleted successfully!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000,
+          theme: "dark",
+        });
+      }, 100);
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -65,7 +74,6 @@ const PostDetails = () => {
 
   const postComment = async (e) => {
     e.preventDefault();
-    setComment("");
     try {
       const newComment = {
         content: comment,
@@ -74,10 +82,17 @@ const PostDetails = () => {
         userId: user.userId,
         createdAt: "now",
       };
-      await axios.post(URL + "/api/post/comment/create", newComment, {
-        withCredentials: true,
-      });
-      setComments([...comments, newComment]);
+      const response = await axios.post(
+        URL + "/api/post/comment/create",
+        newComment,
+        {
+          withCredentials: true,
+        }
+      );
+      const { insertId } = response.data.result;
+      setComments([...comments, { ...newComment, commentId: insertId }]);
+
+      commentInputRef.current.value = "";
     } catch (err) {
       console.log(err);
     }
@@ -136,9 +151,12 @@ const PostDetails = () => {
               <p>{new Date(post.createdAt).toString().slice(16, 24)}</p>
             </div>
           </div>
-          <p className="mx-auto mt-8 text-gray-200">{post.description}</p>
+          <p
+            className="mx-auto mt-8 text-gray-200"
+            dangerouslySetInnerHTML={{ __html: post.description }}
+          />
           <div className="flex flex-col mt-5">
-            <Votes userId={user.userId} postId={postId} />
+            <Votes userId={user?.userId} postId={postId} />
 
             <h3 className="mt-3 mb-4 font-semibold text-white">Comments:</h3>
             {comments.map((c) => (
@@ -153,6 +171,7 @@ const PostDetails = () => {
           {/* write a comment */}
           <div className="w-full flex flex-col mt-4 md:flex-row pb-5">
             <input
+              ref={commentInputRef}
               onChange={(e) => setComment(e.target.value)}
               type="text"
               placeholder="Write a comment"

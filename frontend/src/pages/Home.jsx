@@ -7,6 +7,8 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import { UserContext } from "../context/UserContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -38,6 +40,7 @@ const Home = () => {
 
   return (
     <>
+      <ToastContainer />
       <Navbar />
       <div className="px-8 md:px-[200px] min-h-[80vh] bg-gray-900 text-white pb-7">
         {loader ? (

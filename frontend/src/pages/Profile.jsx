@@ -44,18 +44,41 @@ const Profile = () => {
     } catch (err) {
       console.log(err);
       setUpdated(false);
+      setTimeout(() => {
+        toast.error("Failed to update user!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000,
+          theme: "dark",
+        });
+      }, 100);
+      navigate("/");
     }
   };
 
   const handleUserDelete = async () => {
     try {
-      await axios.delete(URL + "/api/users/user" + user.userId, {
+      await axios.delete(URL + "/api/users/user/" + user.userId, {
         withCredentials: true,
       });
       setUser(null);
+      setTimeout(() => {
+        toast.success("User deleted successfully!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000,
+          theme: "dark",
+        });
+      }, 100);
       navigate("/");
     } catch (err) {
       console.log(err);
+      setTimeout(() => {
+        toast.error("Cannot delete user!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000,
+          theme: "dark",
+        });
+      }, 100);
+      navigate("/");
     }
   };
   const fetchUserPosts = async () => {
@@ -135,7 +158,7 @@ const Profile = () => {
             </div>
             {updated && (
               <h3 className="text-green-500 text-sm text-center mt-4">
-                user updated successfully!
+                User updated successfully!
               </h3>
             )}
           </div>
