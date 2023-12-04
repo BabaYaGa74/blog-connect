@@ -61,4 +61,4 @@ Blog Connect is a simple yet powerful blog application crafted for a college pro
    npm run dev
    ```
 
-6. Open your browser and navigate to `http://localhost:5173` to use this Blog application.
+6. Open your browser and navigate to `http://localhost:5173` to use this application.
