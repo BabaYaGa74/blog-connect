@@ -11,7 +11,7 @@ Blog Connect is a simple yet powerful blog application crafted for a college pro
 
 - **Blog Management:** Users can create, update, and delete blog posts. Each blog post includes a title and description.
 
-- **Comment System:** Users can comment on blog posts. Authors have the ability to update and delete comments.
+- **Comment System:** Users can comment on blog posts. Authors have the ability to update and delete their comments.
 
 - **Voting System:** A robust voting system allows users to vote on blog posts. The voting score is determined by calculating the difference between total upvotes and total downvotes for each post.
 
