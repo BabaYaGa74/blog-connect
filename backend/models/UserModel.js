@@ -26,28 +26,22 @@ const UserModel = {
 
   update: (id, userData) => {
     return new Promise((resolve, reject) => {
-      const { name, username, email, password } = userData;
-      bcrypt.hash(password, SALT, (err, hashedPassword) => {
-        if (err) {
-          return callback(err);
-        } else {
-          const qry =
-            "UPDATE users SET name=?, username=?, email=?, password=? WHERE id = ?";
-          db.query(
-            qry,
-            [name, username, email, hashedPassword, id],
-            (err, result) => {
-              if (err) {
-                reject(err);
-              } else if (result.length == 1) {
-                resolve(result);
-              } else {
-                resolve([]);
-              }
-            }
-          );
-        }
-      });
+      const { name, username, password } = userData;
+      const values = [name, username, password];
+      if (password) {
+        bcrypt.hash(password, SALT, (err, hashedPassword) => {
+          if (err) {
+            reject(err);
+          } else {
+            values.push(hashedPassword);
+            values.push(id);
+            performUpdate(values, resolve, reject);
+          }
+        });
+      } else {
+        values.push(id);
+        performUpdate(values, resolve, reject);
+      }
     });
   },
 
@@ -61,6 +55,19 @@ const UserModel = {
       }
     });
   },
+};
+
+const performUpdate = (values, resolve, reject) => {
+  const qry = "UPDATE users SET name=?, username=?, password =? WHERE id = ?";
+  db.query(qry, values, (err, result) => {
+    if (err) {
+      reject(err);
+    } else if (result.length == 1) {
+      resolve(result);
+    } else {
+      resolve([]);
+    }
+  });
 };
 
 module.exports = UserModel;
