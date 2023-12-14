@@ -17,6 +17,7 @@ const Profile = () => {
   const [posts, setPosts] = useState([{}]);
   const [updated, setUpdated] = useState(false);
   const { user, setUser } = useContext(UserContext);
+  let pass = "";
 
   const fetchProfile = async () => {
     try {
