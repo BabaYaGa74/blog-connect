@@ -22,7 +22,6 @@ const loginUser = (req, res) => {
       res.status(500).send("Error occured during login");
       return;
     } else {
-      console.log(results);
       if (results.length == 1) {
         const id = results[0].id;
         token(id, res);
