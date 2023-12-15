@@ -24,8 +24,8 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, username, email, password } = req.body;
-    const userData = new UserDTO(name, username, email, password);
+    const { name, username, password } = req.body;
+    const userData = { name, username, password };
     const updatedUser = await UserModel.update(id, userData);
     res.status(200).send({ success: true, updatedUser });
   } catch (error) {
