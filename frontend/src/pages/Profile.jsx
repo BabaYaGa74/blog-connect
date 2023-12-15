@@ -6,6 +6,7 @@ import axios from "axios";
 import { URL } from "../url";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
@@ -17,7 +18,6 @@ const Profile = () => {
   const [posts, setPosts] = useState([{}]);
   const [updated, setUpdated] = useState(false);
   const { user, setUser } = useContext(UserContext);
-  let pass = "";
 
   const fetchProfile = async () => {
     try {
@@ -37,7 +37,7 @@ const Profile = () => {
     try {
       const res = await axios.put(
         URL + "/api/users/user/" + user.userId,
-        { name, username, email, password },
+        { name, username, password },
         { withCredentials: true }
       );
       console.log(res.data);
@@ -130,9 +130,9 @@ const Profile = () => {
               type="text"
             />
             <input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              className="outline-none px-4 py-2 text-gray-500"
+              readOnly
+              defaultValue={email}
+              className="outline-none px-4 py-2 text-gray-700 bg-gray-400"
               placeholder="Your email"
               type="email"
             />
