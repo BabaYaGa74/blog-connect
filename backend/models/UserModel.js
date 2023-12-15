@@ -27,21 +27,16 @@ const UserModel = {
   update: (id, userData) => {
     return new Promise((resolve, reject) => {
       const { name, username, password } = userData;
-      const values = [name, username, password];
-      if (password) {
-        bcrypt.hash(password, SALT, (err, hashedPassword) => {
-          if (err) {
-            reject(err);
-          } else {
-            values.push(hashedPassword);
-            values.push(id);
-            performUpdate(values, resolve, reject);
-          }
-        });
-      } else {
-        values.push(id);
-        performUpdate(values, resolve, reject);
-      }
+      const values = [name, username];
+      bcrypt.hash(password, SALT, (err, hashedPassword) => {
+        if (err) {
+          reject(err);
+        } else {
+          values.push(hashedPassword);
+          values.push(id);
+          performUpdate(values, resolve, reject);
+        }
+      });
     });
   },
 
