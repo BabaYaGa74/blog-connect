@@ -62,3 +62,5 @@ Blog Connect is a simple yet powerful blog application crafted for a college pro
    ```
 
 6. Open your browser and navigate to `http://localhost:5173` to use this Blog application.
+
+Developed by [Beeplove](https://github.com/BabaYaGa74), [Sujan](https://github.com/Sujan545) and Ujjwal 👨‍💻
